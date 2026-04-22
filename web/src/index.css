@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Paper palette */
+  --ink:        #1e1810;
+  --ink-2:      #4a3f2f;
+  --ink-3:      #7a6b54;
+  --ink-4:      #a89880;
+  --ink-5:      #c8b89a;
+  --paper:      #faf6ef;
+  --paper-2:    #f2ebe0;
+  --paper-3:    #e8dece;
+  --line:       #d8ccb8;
+  --line-2:     #ebe3d4;
+  --blue-ink:   #1e4a96;
+  --green-ink:  #1d5c38;
+  --amber-ink:  #a05010;
+  --red-ink:    #8b1c1c;
+  --teal-ink:   #14556e;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse 110% 55% at 8% 0%,  rgba(30,74,150,0.06),  transparent 55%),
+    radial-gradient(ellipse 80%  45% at 92% 100%, rgba(29,92,56,0.05), transparent 55%),
+    /* subtle notebook ruled lines */
+    repeating-linear-gradient(
+      180deg,
+      transparent          0px,
+      transparent          30px,
+      rgba(160,130,80,0.09) 30px,
+      rgba(160,130,80,0.09) 31px
+    );
+}
+
+/* Thin scrollbars — sepia tinted */
+.thin-scroll::-webkit-scrollbar        { height: 7px; width: 7px; }
+.thin-scroll::-webkit-scrollbar-thumb  { background: var(--line); border-radius: 6px; }
+.thin-scroll::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+
+/* ── Paper card base ──────────────────────────────────────── */
+.paper-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(100,75,40,0.09), 0 1px 2px rgba(100,75,40,0.06);
+}
+
+.paper-card-inset {
+  background: var(--paper-2);
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+}
+
+/* ── Keyframes ────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0   rgba(30,74,150,0.5); }
+  70%  { box-shadow: 0 0 0 9px rgba(30,74,150,0);   }
+  100% { box-shadow: 0 0 0 0   rgba(30,74,150,0);   }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes verdictReveal {
+  0%   { opacity: 0; transform: scale(0.96) translateY(12px); }
+  60%  { transform: scale(1.01); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Animation utility classes ────────────────────────────── */
+.anim-fade-in-up    { animation: fadeInUp     0.45s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-fade-in-right { animation: fadeInRight  0.3s  ease-out both; }
+.anim-scale-in      { animation: scaleIn      0.35s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-verdict       { animation: verdictReveal 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-pulse-ring    { animation: pulseRing     1.4s ease-out infinite; }
+.anim-blink         { animation: blink         1s   step-start infinite; }
+
+/* Active service bar shimmer — warm ink tone */
+.shimmer-service {
+  background: linear-gradient(90deg, #1d5c38 0%, #3a9e62 40%, #1d5c38 100%);
+  background-size: 200% auto;
+  animation: shimmer 1.2s linear infinite;
+}
